@@ -15,17 +15,19 @@
 
 body {
     height: 100vh;
-    background: linear-gradient(120deg, #0f2027, #2c5364, #dde6ed);
-    overflow: hidden;
+    background: linear-gradient(120deg, #0f2027, #2c5364, #cfd9df);
+    display: flex;
+    flex-direction: column;
     color: white;
+    overflow: hidden;
 }
 
 /* CURSOR GLOW */
 .cursor-glow {
     position: fixed;
-    width: 350px;
-    height: 350px;
-    background: radial-gradient(circle, rgba(255,255,255,0.12), transparent 60%);
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 60%);
     border-radius: 50%;
     pointer-events: none;
     transform: translate(-50%, -50%);
@@ -38,7 +40,7 @@ header {
     position: absolute;
     top: 25px;
     left: 30px;
-    z-index: 3;
+    z-index: 2;
 }
 
 .logo {
@@ -47,73 +49,67 @@ header {
     opacity: 0.9;
 }
 
-/* CONTENEDOR */
+/* CONTENEDOR CENTRAL */
 .container {
-    height: 100%;
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 2;
 }
 
 /* CARD VIDRIO */
 .card {
-    backdrop-filter: blur(25px);
-    background: rgba(255, 255, 255, 0.07);
-    border-radius: 28px;
-    padding: 60px;
-    max-width: 650px;
+    backdrop-filter: blur(18px);
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 50px;
+    max-width: 600px;
     text-align: center;
     border: 1px solid rgba(255,255,255,0.15);
-
-    box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
 
     animation: fadeInUp 1.2s ease-out;
-
-    transform-style: preserve-3d;
-    transition: transform 0.2s ease-out;
-
-    z-index: 2;
 }
 
 /* TITULO */
 h1 {
-    font-size: 44px;
+    font-size: 42px;
     font-weight: 600;
     margin-bottom: 20px;
+    animation: fadeIn 1.5s ease;
 }
 
 /* TEXTO */
 p {
     font-size: 18px;
     color: rgba(255,255,255,0.8);
-    margin-bottom: 40px;
+    margin-bottom: 35px;
+    animation: fadeIn 1.8s ease;
 }
 
 /* BOTON */
 .btn {
-    padding: 14px 34px;
+    padding: 14px 30px;
     border-radius: 30px;
     background: rgba(255,255,255,0.9);
     color: #0f2027;
     font-weight: 600;
     text-decoration: none;
+    transition: all 0.3s ease;
     display: inline-block;
-
-    transition: all 0.2s ease;
-    position: relative;
 }
 
-/* efecto botón magnético */
 .btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 15px 35px rgba(255,255,255,0.25);
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 10px 25px rgba(255,255,255,0.25);
 }
 
 /* ANIMACIONES */
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(40px) scale(0.97);
+        transform: translateY(40px) scale(0.98);
         filter: blur(6px);
     }
     to {
@@ -123,15 +119,30 @@ p {
     }
 }
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* RESPONSIVE */
 @media (max-width: 600px) {
     .card {
-        padding: 35px;
-        margin: 15px;
+        margin: 20px;
+        padding: 30px;
     }
 
     h1 {
         font-size: 30px;
+    }
+
+    p {
+        font-size: 16px;
     }
 }
 </style>
@@ -146,12 +157,12 @@ p {
 </header>
 
 <div class="container">
-    <div class="card" id="card">
+    <div class="card">
         <h1>Aprendé a tu ritmo</h1>
 
         <p>
             Cursos diseñados para potenciar tu crecimiento.
-            Contenido moderno, dinámico y pensado para resultados reales.
+            Contenido claro, moderno y enfocado en resultados reales.
         </p>
 
         #Ingresá al curso</a>
@@ -160,37 +171,10 @@ p {
 
 <script>
 const glow = document.getElementById("glow");
-const card = document.getElementById("card");
 
 document.addEventListener("mousemove", (e) => {
-
-    // glow sigue al mouse
     glow.style.left = e.clientX + "px";
     glow.style.top = e.clientY + "px";
-
-    // efecto parallax (tipo iPhone)
-    const x = (window.innerWidth / 2 - e.clientX) / 25;
-    const y = (window.innerHeight / 2 - e.clientY) / 25;
-
-    card.style.transform = `
-        rotateY(${x}deg)
-        rotateX(${y}deg)
-    `;
-});
-
-// botón magnético
-const btn = document.querySelector(".btn");
-
-btn.addEventListener("mousemove", (e) => {
-    const rect = btn.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-
-    btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px) scale(1.05)`;
-});
-
-btn.addEventListener("mouseleave", () => {
-    btn.style.transform = "translate(0,0) scale(1)";
 });
 </script>
 
