@@ -90,20 +90,74 @@ p {
 
 /* BOTON */
 .btn {
-    padding: 14px 30px;
+    
+    padding: 14px 34px;
     border-radius: 30px;
-    background: rgba(255,255,255,0.9);
+    background: rgba(255,255,255,0.95);
     color: #0f2027;
     font-weight: 600;
     text-decoration: none;
-    transition: all 0.3s ease;
     display: inline-block;
+    position: relative;
+    overflow: hidden;
+
+    transition: all 0.2s ease;
+
 }
 
-.btn:hover {
-    transform: translateY(-3px) scale(1.03);
-    box-shadow: 0 10px 25px rgba(255,255,255,0.25);
+
+/* brillo dinámico */
+.btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.6), transparent);
+    transition: 0.6s;
 }
+
+.btn:hover::before {
+    left: 100%;
+}
+
+/* hover */
+.btn:hover {
+    transform: scale(1.06);
+    box-shadow: 0 15px 35px rgba(255,255,255,0.25);
+}
+
+/* click efecto */
+.btn:active {
+    transform: scale(0.96);
+
+
+/* brillo dinámico */
+.btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.6), transparent);
+    transition: 0.6s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+/* hover */
+.btn:hover {
+    transform: scale(1.06);
+    box-shadow: 0 15px 35px rgba(255,255,255,0.25);
+}
+
+/* click efecto */
+.btn:active {
+    transform: scale(0.96);
 
 /* ANIMACIONES */
 @keyframes fadeInUp {
@@ -165,17 +219,44 @@ p {
             Contenido claro, moderno y enfocado en resultados reales.
         </p>
 
-        #Ingresá al curso</a>
+<a href="#" class="btn" id="btn">Ingresá al curso</a>
     </div>
 </div>
 
 <script>
-const glow = document.getElementById("glow");
 
-document.addEventListener("mousemove", (e) => {
-    glow.style.left = e.clientX + "px";
-    glow.style.top = e.clientY + "px";
+const btn = document.getElementById("btn");
+
+// efecto magnético mejorado
+btn.addEventListener("mousemove", (e) => {
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+
+    btn.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px) scale(1.06)`;
 });
+
+btn.addEventListener("mouseleave", () => {
+    btn.style.transform = "translate(0,0) scale(1)";
+});
+
+// efecto ripple al hacer click
+btn.addEventListener("click", function(e) {
+    const circle = document.createElement("span");
+    circle.classList.add("ripple");
+
+    const rect = btn.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+
+    circle.style.width = circle.style.height = size + "px";
+    circle.style.left = (e.clientX - rect.left - size / 2) + "px";
+    circle.style.top = (e.clientY - rect.top - size / 2) + "px";
+
+    btn.appendChild(circle);
+
+    setTimeout(() => circle.remove(), 600);
+});
+
 </script>
 
 </body>
