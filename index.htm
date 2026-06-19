@@ -2,104 +2,197 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Curso de Comunicación</title>
+<title>Curso Online</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-
-body{
-margin:0;
-font-family:Arial, Helvetica, sans-serif;
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:linear-gradient(135deg,#2f6eb3,#1f4f82);
-color:white;
-text-align:center;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-.container{
-background:white;
-color:#333;
-padding:60px;
-border-radius:12px;
-box-shadow:0 10px 25px rgba(0,0,0,0.2);
-max-width:500px;
+body {
+    height: 100vh;
+    background: linear-gradient(120deg, #0f2027, #2c5364, #dde6ed);
+    overflow: hidden;
+    color: white;
 }
 
-h1{
-margin-top:0;
-color:#1f4f82;
+/* CURSOR GLOW */
+.cursor-glow {
+    position: fixed;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(255,255,255,0.12), transparent 60%);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: transform 0.08s linear;
+    z-index: 1;
 }
 
-.info{
-margin-top:10px;
-margin-bottom:25px;
-font-size:15px;
-color:#555;
+/* LOGO */
+header {
+    position: absolute;
+    top: 25px;
+    left: 30px;
+    z-index: 3;
 }
 
-.button{
-display:block;
-margin:15px auto;
-padding:14px 28px;
-background:#1f4f82;
-color:white;
-text-decoration:none;
-border-radius:8px;
-font-size:18px;
-font-weight:bold;
-width:80%;
+.logo {
+    font-size: 20px;
+    font-weight: 600;
+    opacity: 0.9;
 }
 
-.button:hover{
-background:#16365a;
+/* CONTENEDOR */
+.container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.button-form{
-background:#3a8f3a;
+/* CARD VIDRIO */
+.card {
+    backdrop-filter: blur(25px);
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 28px;
+    padding: 60px;
+    max-width: 650px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.15);
+
+    box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+
+    animation: fadeInUp 1.2s ease-out;
+
+    transform-style: preserve-3d;
+    transition: transform 0.2s ease-out;
+
+    z-index: 2;
 }
 
-.button-form:hover{
-background:#2d6f2d;
+/* TITULO */
+h1 {
+    font-size: 44px;
+    font-weight: 600;
+    margin-bottom: 20px;
 }
 
-.button-back{
-background:#777;
+/* TEXTO */
+p {
+    font-size: 18px;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 40px;
 }
 
-.button-back:hover{
-background:#555;
+/* BOTON */
+.btn {
+    padding: 14px 34px;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.9);
+    color: #0f2027;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+
+    transition: all 0.2s ease;
+    position: relative;
 }
 
+/* efecto botón magnético */
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 35px rgba(255,255,255,0.25);
+}
+
+/* ANIMACIONES */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.97);
+        filter: blur(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    .card {
+        padding: 35px;
+        margin: 15px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+}
 </style>
 </head>
 
 <body>
 
+<div class="cursor-glow" id="glow"></div>
+
+<header>
+    <div class="logo">MiLogo</div>
+</header>
+
 <div class="container">
+    <div class="card" id="card">
+        <h1>Aprendé a tu ritmo</h1>
 
-<h1>Curso de Comunicación</h1>
+        <p>
+            Cursos diseñados para potenciar tu crecimiento.
+            Contenido moderno, dinámico y pensado para resultados reales.
+        </p>
 
-<p>Accedé al contenido del curso desde el botón inferior.</p>
-
-<p class="info">
-Una vez finalizado el curso, es necesario completar el formulario de evaluación.
-</p>
-
-<a class="button" href="comunicacion_para_ford" target="_blank">
-Ingresar al curso
-</a>
-
-<a class="button button-form" href="https://forms.gle/uBr44ND9Q6UrWpDC8" target="_blank">
-Completar formulario de evaluación
-</a>
-
-<a class="button button-back" href="https://capalink.github.io/ParaLideres/">
-Volver al portal de cursos
-</a>
-
+        #Ingresá al curso</a>
+    </div>
 </div>
+
+<script>
+const glow = document.getElementById("glow");
+const card = document.getElementById("card");
+
+document.addEventListener("mousemove", (e) => {
+
+    // glow sigue al mouse
+    glow.style.left = e.clientX + "px";
+    glow.style.top = e.clientY + "px";
+
+    // efecto parallax (tipo iPhone)
+    const x = (window.innerWidth / 2 - e.clientX) / 25;
+    const y = (window.innerHeight / 2 - e.clientY) / 25;
+
+    card.style.transform = `
+        rotateY(${x}deg)
+        rotateX(${y}deg)
+    `;
+});
+
+// botón magnético
+const btn = document.querySelector(".btn");
+
+btn.addEventListener("mousemove", (e) => {
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+
+    btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px) scale(1.05)`;
+});
+
+btn.addEventListener("mouseleave", () => {
+    btn.style.transform = "translate(0,0) scale(1)";
+});
+</script>
 
 </body>
 </html>
