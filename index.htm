@@ -15,7 +15,7 @@
 
 body {
     height: 100vh;
-    background: linear-gradient(120deg, #0f2027, #2c5364, #cfd9df);
+    background: linear-gradient(135deg, #0f172a, #1e3a8a, #6366f1);
     display: flex;
     flex-direction: column;
     color: white;
@@ -30,12 +30,11 @@ header {
     z-index: 2;
 }
 
-
 .logo {
-    width: 120px;   /* tamaño del logo */
+    width: 170px; /* más grande */
     height: auto;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4));
 }
-
 
 /* CONTENEDOR CENTRAL */
 .container {
@@ -45,42 +44,42 @@ header {
     align-items: center;
 }
 
-/* CARD VIDRIO (agrandada) */
+/* CARD VIDRIO */
 .card {
-    backdrop-filter: blur(18px);
+    backdrop-filter: blur(20px);
     background: rgba(255, 255, 255, 0.08);
-    border-radius: 24px;
-    padding: 70px;              /* más espacio interno */
-    max-width: 850px;           /* más ancho */
-    width: 85%;                 /* ocupa más pantalla */
+    border-radius: 26px;
+    padding: 70px;
+    max-width: 850px;
+    width: 85%;
     text-align: center;
-    border: 1px solid rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.2);
 
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    box-shadow: 0 25px 70px rgba(0,0,0,0.4);
 
     animation: fadeInUp 1.2s ease-out;
 }
 
 /* TITULO */
 h1 {
-    font-size: 46px;
+    font-size: 48px;
     font-weight: 600;
     margin-bottom: 25px;
 }
 
 /* TEXTO */
 p {
-    font-size: 19px;
+    font-size: 20px;
     color: rgba(255,255,255,0.85);
     margin-bottom: 40px;
 }
 
-/* BOTON MEJORADO */
+/* BOTON */
 .btn {
-    padding: 15px 35px;
-    border-radius: 30px;
-    background: linear-gradient(120deg, #ffffff, #232c38;
-    color: #0f2027;
+    padding: 15px 40px;
+    border-radius: 35px;
+    background: linear-gradient(120deg, #ffffff, #dbeafe); /* corregido */
+    color: #1e3a8a;
     font-weight: 600;
     text-decoration: none;
     display: inline-block;
@@ -88,16 +87,16 @@ p {
     transition: all 0.35s ease;
 }
 
-/* cambio de color animado */
+/* HOVER */
 .btn:hover {
-    background: linear-gradient(120deg, #0a0c12, #0d1321);
+    background: linear-gradient(120deg, #1e3a8a, #6366f1);
     color: white;
 
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.4);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(99, 102, 241, 0.5);
 }
 
-/* ANIMACIONES */
+/* ANIMACION */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -126,6 +125,10 @@ p {
     p {
         font-size: 16px;
     }
+
+    .logo {
+        width: 130px;
+    }
 }
 
 </style>
@@ -143,7 +146,6 @@ p {
 
         <p>
             La comunicación es una herramienta fundamental en nuestra vida diaria.
-
         </p>
 
         <a href="#" class="btn">Ingresá al curso</a>
